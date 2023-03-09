@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +22,14 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('articles', [ArticleController::class, 'index']);
-Route::get('articles/{article}', [ArticleController::class, 'show']);
-Route::post('articles', [ArticleController::class, 'store']);
-Route::put('articles/{article}', [ArticleController::class, 'update']);
-Route::delete('articles/{article}', [ArticleController::class, 'delete']);
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('articles', [ArticleController::class, 'index']);
+    Route::get('articles/{article}', [ArticleController::class, 'show']);
+    Route::post('articles', [ArticleController::class, 'store']);
+    Route::put('articles/{article}', [ArticleController::class, 'update']);
+    Route::delete('articles/{article}', [ArticleController::class, 'delete']);
+});
+
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout']);
+Route::post('register', [RegisterController::class, 'register']);
