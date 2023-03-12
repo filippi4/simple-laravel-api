@@ -26,6 +26,7 @@ Simple laravel application using api requests with token.
 git clone https://github.com/kfilippovk/simple-laravel-api.git
 cd simple-laravel-api
 cp .env.example .env
+composer update
 ./vendor/bin/sail up -d
 ./vendor/bin/sail artisan migrate --seed
 ```
