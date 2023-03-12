@@ -49,7 +49,7 @@ class LoginController extends Controller
             $user->generateToken();
 
             return response()->json([
-                'date' => $user->toArray(),
+                'data' => $user->toArray(),
             ]);
         }
 
